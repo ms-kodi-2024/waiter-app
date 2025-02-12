@@ -1,0 +1,32 @@
+{
+	"tables": [
+		{
+			"id": "1",
+			"status": "busy",
+			"guestStaying": "2",
+			"tableFor": "4",
+			"bill": "40" 
+		},
+		{
+			"id": "2",
+			"status": "reserved",
+			"guestStaying": "2",
+			"tableFor": "2",
+			"bill": "0" 
+		},
+		{
+			"id": "3",
+			"status": "cleaning",
+			"guestStaying": "6",
+			"tableFor": "6",
+			"bill": "0" 
+		},
+		{
+			"id": "4",
+			"status": "busy",
+			"guestStaying": "2",
+			"tableFor": "2",
+			"bill": "5" 
+		}
+	]
+}
