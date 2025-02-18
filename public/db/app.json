@@ -2,17 +2,17 @@
   "tables": [
     {
       "id": "1",
-      "status": "reserved",
-      "guestStaying": "2",
-      "tableFor": "4",
-      "bill": "0"
+      "status": "busy",
+      "guestStaying": 4,
+      "tableFor": 4,
+      "bill": 40
     },
     {
       "id": "2",
       "status": "busy",
       "guestStaying": "2",
       "tableFor": "2",
-      "bill": "10"
+      "bill": "0"
     },
     {
       "id": "3",
@@ -26,6 +26,13 @@
       "status": "free",
       "guestStaying": "2",
       "tableFor": "2",
+      "bill": "0"
+    },
+    {
+      "id": "5",
+      "status": "busy",
+      "guestStaying": "2",
+      "tableFor": "3",
       "bill": "0"
     }
   ]

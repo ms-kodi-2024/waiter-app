@@ -10,26 +10,41 @@ const EditTable = () => {
 	const { id } = useParams();
 	const dispatch = useDispatch();
 	const navigate = useNavigate();
+	const table = useSelector((state) => selectTableById(state, id));
 
- 	const table = useSelector((state) => selectTableById(state, id));
-
-	const [status, setStatus] = useState(table.status);
-	const [guestStaying, setGuestStaying] = useState(table.guestStaying);
-	const [tableFor, setTableFor] = useState(table.tableFor);
-	const [bill, setBill] = useState(table.bill);
+	const [status, setStatus] = useState(table.status || 0);
+	const [guestStaying, setGuestStaying] = useState(table.guestStaying || 0);
+	const [tableFor, setTableFor] = useState(table.tableFor || 0);
+	const [bill, setBill] = useState(table.bill || 0);
 
 	const handleStatusChange = e => {
-    setStatus(e.target.value);
+		const newStatus = e.target.value;
+		setStatus(newStatus);
+		if (newStatus === "cleaning" || newStatus === "free") {
+      setGuestStaying(0);
+    }
+    if (newStatus !== "busy") {
+      setBill(0);
+    }
 	};
 	const handleGuestStayingChange = e => {
-    setGuestStaying(e.target.value);
+    let value = parseInt(e.target.value) || 0;
+    value = Math.min(Math.max(value, 0), 10);
+    value = Math.min(value, tableFor);
+    setGuestStaying(value);
 	};
-	const handleTableForChange = e => {
-    setTableFor(e.target.value);
-	};
-	const handleBillChange = e => {
-    setBill(e.target.value);
-	};
+	const handleTableForChange = (e) => {
+    let value = parseInt(e.target.value) || 0;
+    value = Math.min(Math.max(value, 0), 10);
+    setTableFor(value);
+    if (guestStaying > value) {
+      setGuestStaying(value);
+    }
+  };
+	const handleBillChange = (e) => {
+    let value = parseFloat(e.target.value) || 0;
+    setBill(value);
+  };
 	
 	const handleSubmit = e => {
 		e.preventDefault();
@@ -51,7 +66,7 @@ const EditTable = () => {
 			<Form onSubmit={handleSubmit}>
 				<FormGroup className="d-flex align-items-center pt-3">
 					<Form.Label htmlFor="status" className="fw-bold mb-0">Status: </Form.Label>
-					<Form.Select className="ms-4" id="status" defaultValue={status} style={{ width: "300px" }} onChange={handleStatusChange}>
+					<Form.Select className="ms-4" id="status" value={status} style={{ width: "300px" }} onChange={handleStatusChange}>
 						<option value="free">Free</option>
 						<option value="busy">Busy</option>
 						<option value="reserved">Reserved</option>

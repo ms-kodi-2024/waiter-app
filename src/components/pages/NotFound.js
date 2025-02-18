@@ -1,5 +1,14 @@
+import { useEffect } from "react";
+import { useNavigate } from "react-router-dom";
+
 const NotFound = () => {
-  return <h1>NotFound</h1>;
+  const navigate = useNavigate();
+
+  useEffect(() => {
+    navigate("/");
+  }, [navigate]);
+  
+  return null;
 };
 
 export default NotFound;
