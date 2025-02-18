@@ -1,3 +1,5 @@
+import { API_URL } from "../config";
+
 //selectors
 export const getAllTables = ({ tables }) => tables;
 export const selectTableById = ({ tables }, tableId) => 
@@ -15,7 +17,7 @@ export const updateEditTable = payload => ({ type: UPDATE_EDIT_TABLE, payload })
 // middleware
 export const fetchTables = () => {
   return dispatch => {
-    fetch('http://localhost:3131/api/tables')
+    fetch(`${API_URL}/tables`)
       .then(res => res.json())
       .then(tables => dispatch(updateTables(tables)))
   }
@@ -31,7 +33,7 @@ export const fetchUpdateEditTable = (id, changes) => {
       body: JSON.stringify(changes)
     };
 
-    fetch(`http://localhost:3131/tables/${id}`, options)
+    fetch(`${API_URL}/tables/${id}`, options)
       .then(res => {
         if (!res.ok) throw new Error("Error while updating the table");
         return res.json();
