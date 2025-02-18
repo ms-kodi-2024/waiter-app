@@ -1,0 +1,39 @@
+{
+  "tables": [
+    {
+      "id": "1",
+      "status": "reserved",
+      "guestStaying": 4,
+      "tableFor": 4,
+      "bill": 0
+    },
+    {
+      "id": "2",
+      "status": "busy",
+      "guestStaying": "2",
+      "tableFor": "2",
+      "bill": "0"
+    },
+    {
+      "id": "3",
+      "status": "cleaning",
+      "guestStaying": "6",
+      "tableFor": "6",
+      "bill": "40"
+    },
+    {
+      "id": "4",
+      "status": "free",
+      "guestStaying": "2",
+      "tableFor": "2",
+      "bill": "0"
+    },
+    {
+      "id": "5",
+      "status": "busy",
+      "guestStaying": "2",
+      "tableFor": "3",
+      "bill": "0"
+    }
+  ]
+}
