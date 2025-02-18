@@ -3,19 +3,33 @@ import { Form, Button, FormGroup } from "react-bootstrap";
 import { useParams, useNavigate } from "react-router-dom";
 import { selectTableById, fetchUpdateEditTable } from "../../redux/tablesRedux";
 import { useSelector, useDispatch } from "react-redux";
-import { useState } from "react";
+import { useState, useEffect } from "react";
 
 const EditTable = () => {
 	
 	const { id } = useParams();
 	const dispatch = useDispatch();
 	const navigate = useNavigate();
+	
 	const table = useSelector((state) => selectTableById(state, id));
+	
+	const [status, setStatus] = useState(table?.status);
+  const [guestStaying, setGuestStaying] = useState(table?.guestStaying);
+  const [tableFor, setTableFor] = useState(table?.tableFor);
+  const [bill, setBill] = useState(table?.bill);
 
-	const [status, setStatus] = useState(table.status || 0);
-	const [guestStaying, setGuestStaying] = useState(table.guestStaying || 0);
-	const [tableFor, setTableFor] = useState(table.tableFor || 0);
-	const [bill, setBill] = useState(table.bill || 0);
+  useEffect(() => {
+    if (!table) {
+      navigate("/");
+    } else {
+      setStatus(table.status);
+      setGuestStaying(table.guestStaying);
+      setTableFor(table.tableFor);
+      setBill(table.bill);
+    }
+  }, [table, navigate]);
+
+  if (!table) return null;
 
 	const handleStatusChange = e => {
 		const newStatus = e.target.value;
@@ -59,8 +73,8 @@ const EditTable = () => {
 		};
 		navigate("/");
 	};
-
-  return (
+	
+	return (
 		<React.Fragment>
 			<h1 className="mb-4">Table {table.id}</h1>
 			<Form onSubmit={handleSubmit}>
