@@ -1,7 +1,7 @@
-import { getAllTables, fetchTables } from "../../redux/tablesRedux";
+import { getAllTables, fetchTables, removeTableRequest } from "../../redux/tablesRedux";
 import { useEffect } from "react";
 import { useDispatch, useSelector } from "react-redux";
-import { Link } from 'react-router-dom';
+import { Link } from "react-router-dom";
 import { ListGroup, ListGroupItem } from "react-bootstrap";
 
 const Home = () => {
@@ -9,6 +9,12 @@ const Home = () => {
 	const tables = useSelector(getAllTables);
 
 	useEffect(() => dispatch(fetchTables()), [dispatch]);
+
+	const handleDelete = id => {
+    if (window.confirm('Are you sure you want to delete this table?')) {
+      dispatch(removeTableRequest(id));
+    }
+  };
 
   return (
     <>
@@ -25,7 +31,10 @@ const Home = () => {
 										{table.status.slice(1)}
 									</p>
 							</div>	
-								<Link to={`/table/edit/${table.id}`} className="btn btn-primary">Show more</Link>
+							<div>
+								<Link to={`/table/edit/${table.id}`} className="btn btn-primary me-4">Show more</Link>
+								<button type="button" className="btn btn-danger" onClick={() => handleDelete(table.id)}>Delete</button>
+							</div>
 						</div>
 					</ListGroupItem>
 				))}

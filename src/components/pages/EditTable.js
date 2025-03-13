@@ -19,14 +19,7 @@ const EditTable = () => {
   const [bill, setBill] = useState(table?.bill);
 
   useEffect(() => {
-    if (!table) {
-      navigate("/");
-    } else {
-      setStatus(table.status);
-      setGuestStaying(table.guestStaying);
-      setTableFor(table.tableFor);
-      setBill(table.bill);
-    }
+    if (!table) navigate("/");
   }, [table, navigate]);
 
   if (!table) return null;
@@ -47,7 +40,7 @@ const EditTable = () => {
     value = Math.min(value, tableFor);
     setGuestStaying(value);
 	};
-	const handleTableForChange = (e) => {
+	const handleTableForChange = e => {
     let value = parseInt(e.target.value) || 0;
     value = Math.min(Math.max(value, 0), 10);
     setTableFor(value);
@@ -55,7 +48,7 @@ const EditTable = () => {
       setGuestStaying(value);
     }
   };
-	const handleBillChange = (e) => {
+	const handleBillChange = e => {
     let value = parseFloat(e.target.value) || 0;
     setBill(value);
   };

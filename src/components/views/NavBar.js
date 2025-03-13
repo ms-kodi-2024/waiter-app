@@ -8,6 +8,9 @@ const NavBar = () => {
 				<li className="list-inline-item px-2">
 					<NavLink className={({ isActive }) => isActive ? styles.linkActive : styles.link} to="/">Home</NavLink>
 				</li>
+				<li>
+					<NavLink className={({ isActive }) => isActive ? styles.linkActive : styles.link} to="/table/add">Add table</NavLink>
+				</li>
 			</ul>
 		</div>
 	)
